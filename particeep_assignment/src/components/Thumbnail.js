@@ -25,14 +25,12 @@ const Thumbnail = ({
   }
   return (
     <div className='p-2 group cursor-pointer transition duration-200 ease-in transform sm:hover:scale-105 hover:z-50'>
-      <div style={{ height: '30rem' }}>
+      <div style={{ height: '27rem' }}>
         <LazyLoadImage
           src={img_url}
-          style={{ height: '-webkit-fill-available' }}
+          style={{ height: '-webkit-fill-available', width: '100%' }}
           //  effect='blur'
           alt={title}
-          height={1080}
-          width={1920}
         />
       </div>
       <div className='p-2'>

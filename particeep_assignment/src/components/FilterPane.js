@@ -20,7 +20,7 @@ const FilterPane = ({ selectedCategory, onCategoryChange, handleCheck }) => {
     <div className='px-10'>
       <form
         onSubmit={handleSubmit}
-        className='flex items-center   space-x-4 justify-center mb-5 '
+        className='flex items-center   space-x-4 justify-center mb-4 '
       >
         <div className='flex  whitespace-nowrap space-x-2'>
           <input

@@ -12,7 +12,7 @@ import {
 } from '@heroicons/react/outline';
 function Header() {
   return (
-    <header className='flex flex-col sm:flex-row m-5  items-center'>
+    <header className='flex flex-col sm:flex-row m-5 mb-0  items-center'>
       <div className='flex flex-grow justify-evenly max-w-2xl'>
         <HeaderItem title='HOME' Icon={HomeIcon} />
         <HeaderItem title='ACCOUNT' Icon={UserIcon} />
