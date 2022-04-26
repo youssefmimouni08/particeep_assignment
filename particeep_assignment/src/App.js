@@ -26,7 +26,7 @@ function App({
   return (
     <div>
       <Header />
-      <FilterPane categories={categories} />
+      <FilterPane />
 
       <Results />
     </div>

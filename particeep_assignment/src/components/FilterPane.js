@@ -1,22 +1,15 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { connect, useDispatch } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import {
   onCategoryChange,
   handleCheck,
   setMoviesPerPage,
 } from '../actions/movie';
 
-const FilterPane = ({
-  categories,
-  movie: { options },
-  selectedYear,
-  selectedCategory,
-  onCategoryChange,
-  handleCheck,
-}) => {
+const FilterPane = ({ selectedCategory, onCategoryChange, handleCheck }) => {
   const dispatch = useDispatch();
-
+  const { categories, options } = useSelector((state) => state.movie);
   const [moviesNumber, setMoviesNumber] = useState('');
 
   const handleSubmit = (event) => {

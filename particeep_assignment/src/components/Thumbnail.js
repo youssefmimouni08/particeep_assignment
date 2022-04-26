@@ -6,9 +6,10 @@ import { TrashIcon } from '@heroicons/react/outline';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { addLike, disLike, deleteMovie } from '../actions/movie';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const Thumbnail = ({
-  movie: { category, title, likes, dislikes, id },
+  movie: { category, title, img_url, likes, dislikes, id },
   addLike,
   disLike,
   deleteMovie,
@@ -16,28 +17,46 @@ const Thumbnail = ({
   const movie = useSelector((state) => state.movie);
 
   return (
-    <div className=' flex-shrink-0 m-5 rounded overflow-hidden shadow-lg bg-gradient-to-r from-cyan-500 to-blue-500 transition duration-200 ease-in transform sm:hover:scale-105 hover:z-50 '>
-      <div className='flex px-6 py-4 justify-between'>
-        <div className='font-bold text-xl mb-2 text-center'>{title}</div>
-        <TrashIcon
-          onClick={(e) => deleteMovie(id)}
-          className='h-6 hover:text-red-500'
+    <div className='p-2 group cursor-pointer transition duration-200 ease-in transform sm:hover:scale-105 hover:z-50'>
+      <div style={{ height: '30rem' }}>
+        <LazyLoadImage
+          src={img_url}
+          style={{ height: '-webkit-fill-available' }}
+          //  effect='blur'
+          alt={title}
+          height={1080}
+          width={1920}
         />
       </div>
-      <div className='flex px-6 pt-4 pb-2 justify-center'>
-        <span className='inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2'>
-          {`#${category}`}
-        </span>
-      </div>
-      <div className='flex px-6 pt-4 pb-2 justify-center space-x-5'>
-        <div className='cursor-pointer transition duration-100 transform hover:scale-125 hover:text-white active:text-red-400'>
-          <FontAwesomeIcon onClick={(e) => addLike(id)} icon={faThumbsUp} />
-          <span>{likes > 0 && <span>{likes}</span>}</span>
-        </div>
-        <div className='cursor-pointer transition duration-100 transform hover:scale-125 hover:text-white active:text-red-400'>
-          <FontAwesomeIcon onClick={(e) => disLike(id)} icon={faThumbsDown} />
-          <span>{dislikes > 0 && <span>{dislikes}</span>}</span>
-        </div>
+      <div className='p-2'>
+        <p className='truncate max-w-md'>{category}</p>
+        <h2 className='mt-1 text-2xl text-white transition-all duration-100 ease-in-out group-hover:font-bold'>
+          {title}
+        </h2>
+        <p className='flex items-center opacity-0 group-hover:opacity-100 justify-between '>
+          <div className='flex '>
+            <div className=''>
+              <FontAwesomeIcon
+                className='mr-2'
+                onClick={(e) => addLike(id)}
+                icon={faThumbsUp}
+              />
+              <span>{likes > 0 && <span>{likes}</span>}</span>
+            </div>
+            <div className=''>
+              <FontAwesomeIcon
+                className='ml-2'
+                onClick={(e) => disLike(id)}
+                icon={faThumbsDown}
+              />
+              <span>{dislikes > 0 && <span>{dislikes}</span>}</span>
+            </div>
+          </div>
+          <TrashIcon
+            onClick={(e) => deleteMovie(id)}
+            className='h-6 hover:text-red-500'
+          />
+        </p>
       </div>
     </div>
   );

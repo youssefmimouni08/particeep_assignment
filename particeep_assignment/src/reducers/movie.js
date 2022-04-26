@@ -105,15 +105,65 @@ export default function (state = initialState, action) {
         loading: false,
       };
     case DELETE_MOVIE:
+      const remainedCategories = [
+        ...new Set(
+          state.movies
+            .filter((movie) => movie.id !== payload)
+            .map((movie) => movie.category)
+        ),
+      ];
+      indexOfLastMovie = state.currentPage * state.moviesPerPage;
+      indexOfFirstMovie = indexOfLastMovie - state.moviesPerPage;
+      let selected = [];
+      if (
+        state.selected_category.length <= 1 ||
+        state.selected_category === 'all'
+      ) {
+        selected = remainedCategories.includes(state.selected_category[1])
+          ? state.selected_category
+          : 'all';
+      } else if (state.selected_category.length > 1) {
+        state.selected_category.forEach((c) => {
+          if (!remainedCategories.includes(c)) {
+            selected = state.selected_category.filter((s) => s !== c);
+          } else selected = state.selected_category;
+        });
+      }
+      let remainedOptions = [];
+
+      remainedCategories.forEach((c) => {
+        remainedOptions.push(
+          ...state.options.filter((option) => option.value === c)
+        );
+      });
+      console.log(remainedOptions);
+
       return {
         ...state,
         visibleMovies: state.visibleMovies.filter(
           (movie) => movie.id !== payload
         ),
+
         movies: state.movies.filter((movie) => movie.id !== payload),
-        currentMovies: state.currentMovies.filter(
-          (movie) => movie.id !== payload
-        ),
+        currentMovies:
+          state.selected_category === 'all'
+            ? state.movies
+                .filter((movie) => movie.id !== payload)
+                .slice(indexOfFirstMovie, indexOfLastMovie)
+            : state.visibleMovies
+                .filter((movie) => movie.id !== payload)
+                .slice(indexOfFirstMovie, indexOfLastMovie),
+
+        categories: [
+          ...new Set(
+            state.movies
+              .filter((movie) => movie.id !== payload)
+              .map((movie) => movie.category)
+          ),
+        ],
+        options: remainedOptions,
+        selected_category: selected,
+
         loading: false,
       };
     case SET_PAGE_NUMBER:
@@ -128,11 +178,12 @@ export default function (state = initialState, action) {
             : state.visibleMovies.slice(indexOfFirstMovie, indexOfLastMovie),
       };
     case SET_MOVIES_PER_PAGE:
-      indexOfLastMovie = state.currentPage * payload;
+      indexOfLastMovie = 1 * payload;
       indexOfFirstMovie = indexOfLastMovie - payload;
       return {
         ...state,
         moviesPerPage: payload,
+        currentPage: 1,
         currentMovies:
           state.selected_category === 'all'
             ? state.movies.slice(indexOfFirstMovie, indexOfLastMovie)
