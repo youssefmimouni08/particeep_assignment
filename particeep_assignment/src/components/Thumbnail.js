@@ -15,7 +15,14 @@ const Thumbnail = ({
   deleteMovie,
 }) => {
   const movie = useSelector((state) => state.movie);
-
+  let ratio = parseInt(
+    ((parseFloat(likes) - parseFloat(dislikes)) /
+      (parseFloat(likes) + parseFloat(dislikes))) *
+      100
+  );
+  if (isNaN(ratio)) {
+    ratio = 0;
+  }
   return (
     <div className='p-2 group cursor-pointer transition duration-200 ease-in transform sm:hover:scale-105 hover:z-50'>
       <div style={{ height: '30rem' }}>
@@ -30,9 +37,16 @@ const Thumbnail = ({
       </div>
       <div className='p-2'>
         <p className='truncate max-w-md'>{category}</p>
-        <h2 className='mt-1 text-2xl text-white transition-all duration-100 ease-in-out group-hover:font-bold'>
-          {title}
-        </h2>
+        <div className='flex justify-between'>
+          <h2 className='mt-1 text-2xl text-white transition-all duration-100 ease-in-out group-hover:font-bold'>
+            {title}
+          </h2>
+          {ratio >= 0 ? (
+            <p style={{ color: '#128c02' }}>{ratio}%</p>
+          ) : (
+            <p style={{ color: '#d30404' }}>{Math.abs(ratio)}%</p>
+          )}
+        </div>
         <p className='flex items-center opacity-0 group-hover:opacity-100 justify-between '>
           <div className='flex '>
             <div className=''>
