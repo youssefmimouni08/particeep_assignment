@@ -20,7 +20,7 @@ const FilterPane = ({ selectedCategory, onCategoryChange, handleCheck }) => {
     <div className='px-10'>
       <form
         onSubmit={handleSubmit}
-        className='flex items-center   space-x-7  justify-end mb-5 '
+        className='flex items-center   space-x-4 justify-center mb-5 '
       >
         <div className='flex  whitespace-nowrap space-x-2'>
           <input
@@ -36,15 +36,11 @@ const FilterPane = ({ selectedCategory, onCategoryChange, handleCheck }) => {
 
         <button
           type='submit'
-          className='h-10 w-fit text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+          className='h-10 w-fit  bg-gray-300 hover:bg-gray-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-gray-800 text-sm  sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
         >
           Submit
         </button>
       </form>
-      <h2 className=' flex text-lg justify-start sm:justify-start '>
-        {' '}
-        Filter by Categories :
-      </h2>
       <div className=' flex px-5 sm:px-20 text-md sm:text-xl whitespace-nowrap space-x-10 sm:space-x-20 overflow-x-scroll scrollbar-hide sm:justify-center'>
         {options.map((g, i) => (
           <div
@@ -62,8 +58,6 @@ const FilterPane = ({ selectedCategory, onCategoryChange, handleCheck }) => {
           </div>
         ))}
       </div>
-
-      <div className='absolute  top-0 right-0 bg-gradient-to-l from-[#06202A] h-10 w-1/12' />
     </div>
   );
 };

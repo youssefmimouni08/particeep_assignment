@@ -18,7 +18,7 @@ const initialState = {
   selected_category: 'all',
   loading: true,
   currentPage: 1,
-  moviesPerPage: 2,
+  moviesPerPage: 3,
   currentMovies: [],
   error: {},
 };
