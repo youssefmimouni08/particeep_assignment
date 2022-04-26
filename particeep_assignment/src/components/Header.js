@@ -18,7 +18,7 @@ function Header() {
         <HeaderItem title='ACCOUNT' Icon={UserIcon} />
         <HeaderItem title='SEARCH' Icon={SearchIcon} />
       </div>
-      <div className=' flex w-full justify-end'>
+      <div className=' flex w-full justify-center sm:justify-end'>
         <LazyLoadImage src='logo.png' width={200} />
       </div>
     </header>
