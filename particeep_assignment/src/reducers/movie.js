@@ -40,7 +40,7 @@ export default function (state = initialState, action) {
             checked: false,
           })),
         ],
-        currentMovies: state.movies.slice(indexOfFirstMovie, indexOfLastMovie),
+        currentMovies: payload.slice(indexOfFirstMovie, indexOfLastMovie),
         loading: false,
       };
     case MOVIES_ERROR:
