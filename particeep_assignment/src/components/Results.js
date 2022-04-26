@@ -8,6 +8,7 @@ const Results = () => {
     visibleMovies,
     selected_category,
     currentMovies,
+    currentPage,
     moviesPerPage,
     movies,
   } = useSelector((state) => state.movie);
@@ -23,6 +24,7 @@ const Results = () => {
       <Pagination
         Totalmovies={totalMovies.length}
         moviesPerPage={moviesPerPage}
+        currentPage={currentPage}
       />
     </div>
   );

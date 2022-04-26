@@ -67,7 +67,8 @@ export default function (state = initialState, action) {
           if (!curr.includes(movie) && movie) curr.push(movie);
         });
       }
-
+      indexOfLastMovie = 1 * state.moviesPerPage;
+      indexOfFirstMovie = indexOfLastMovie - state.moviesPerPage;
       return {
         ...state,
         options: payload.options,
@@ -75,6 +76,7 @@ export default function (state = initialState, action) {
           return payload.selected.includes(movie.category);
         }),
         selected_category: payload.selected,
+        currentPage: 1,
         currentMovies:
           payload.selected === 'all'
             ? state.movies.slice(indexOfFirstMovie, indexOfLastMovie)
@@ -115,7 +117,7 @@ export default function (state = initialState, action) {
         loading: false,
       };
     case SET_PAGE_NUMBER:
-      indexOfLastMovie = state.currentPage * state.moviesPerPage;
+      indexOfLastMovie = payload * state.moviesPerPage;
       indexOfFirstMovie = indexOfLastMovie - state.moviesPerPage;
       return {
         ...state,

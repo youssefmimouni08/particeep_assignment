@@ -1,11 +1,12 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { paginate } from '../actions/movie';
-const Pagination = ({ Totalmovies, moviesPerPage }) => {
+const Pagination = ({ Totalmovies, moviesPerPage, currentPage }) => {
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(Totalmovies / moviesPerPage); i++) {
     pageNumbers.push(i);
   }
+  console.log(currentPage);
   const dispatch = useDispatch();
   return (
     <nav aria-label='Page navigation example'>
