@@ -10,6 +10,8 @@ import {
   SET_MOVIES_PER_PAGE,
 } from './types';
 import { movies$ } from '../movies';
+
+import store from '../store';
 // GET MOVIES
 export const getMovies = () => async (dispatch) => {
   try {
@@ -52,44 +54,34 @@ export const handleCheck = (i, options) => async (dispatch) => {
   });
 };
 export const addLike = (id) => async (dispatch) => {
-  try {
-    const data = await movies$;
-    data.map((movie) => {
-      if (movie.id === id) {
-        movie.likes++;
-      }
-    });
-    dispatch({
-      type: UPDATE_LIKES,
-      payload: { id, data },
-    });
-  } catch (err) {
-    dispatch({
-      type: MOVIES_ERROR,
-      payload: { msg: err.response, status: '404' },
-    });
-  }
+  const { movies } = store.getState().movie;
+  console.log(movies);
+
+  const data = movies;
+  data.map((movie) => {
+    if (movie.id === id) {
+      movie.likes++;
+    }
+  });
+  dispatch({
+    type: UPDATE_LIKES,
+    payload: { id, data },
+  });
 };
 export const disLike = (id) => async (dispatch) => {
-  try {
-    const data = await movies$;
-    data.map((movie) => {
-      if (movie.id === id) {
-        movie.dislikes++;
-      }
-    });
+  const { movies } = store.getState().movie;
 
-    dispatch({
-      type: UPDATE_DISLIKES,
-      payload: { id, data },
-    });
-  } catch (err) {
-    console.log(err);
-    dispatch({
-      type: MOVIES_ERROR,
-      payload: { msg: err.response, status: '404' },
-    });
-  }
+  const data = movies;
+  data.map((movie) => {
+    if (movie.id === id) {
+      movie.dislikes++;
+    }
+  });
+
+  dispatch({
+    type: UPDATE_DISLIKES,
+    payload: { id, data },
+  });
 };
 export const deleteMovie = (id) => async (dispatch) => {
   try {

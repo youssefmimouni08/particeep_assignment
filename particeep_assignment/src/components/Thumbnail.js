@@ -45,7 +45,7 @@ const Thumbnail = ({
             <p style={{ color: '#d30404' }}>{Math.abs(ratio)}%</p>
           )}
         </div>
-        <p className='flex items-center opacity-0 group-hover:opacity-100 justify-between '>
+        <div className='flex items-center opacity-0 group-hover:opacity-100 justify-between '>
           <div className='flex '>
             <div className=''>
               <FontAwesomeIcon
@@ -68,7 +68,7 @@ const Thumbnail = ({
             onClick={(e) => deleteMovie(id)}
             className='h-6 hover:text-red-500'
           />
-        </p>
+        </div>
       </div>
     </div>
   );
